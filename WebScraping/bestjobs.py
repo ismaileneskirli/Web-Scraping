@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+import json
+
 
 headers_param = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:88.0) Gecko/20100101 Firefox/88.0"}
 glassdor = requests.get("https://www.glassdoor.com/List/Best-Jobs-in-America-2019-LST_KQ0,25.htm",headers=headers_param)
@@ -45,3 +47,7 @@ for job in jobs:
     job_dict[job_names[i]] = (job_datas[j],job_datas[j+1], job_datas[j+2])
     i += 1
     j += 3
+
+# Exporting Data to json file.
+with open("jobs.json", "w") as outfile:
+    json.dump(job_dict, outfile, indent=3)
